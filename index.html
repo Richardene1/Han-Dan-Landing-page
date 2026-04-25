@@ -6,444 +6,415 @@
   <title>Han&amp;Dan Energy Services Limited</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
+/* =========================================================
+   HAN&DAN ENERGY SERVICES — LANDING PAGE
+   ========================================================= */
 
-/* ── TOKENS ── */
+/* ---------- ROOT TOKENS ---------- */
 :root {
-  --bg:          #0d1410;
-  --bg-card:     #131b15;
-  --bg-card-2:   #172019;
-  --bg-nav:      rgba(13,20,16,0.92);
-  --green:       #28c76f;
-  --green-dark:  #1da058;
-  --green-dim:   rgba(40,199,111,0.14);
-  --green-border:rgba(40,199,111,0.28);
-  --text:        #ffffff;
-  --text-soft:   #c4d0c7;
-  --text-muted:  #7e9183;
-  --line:        rgba(255,255,255,0.07);
-  --line-md:     rgba(255,255,255,0.11);
-  --radius-sm:   12px;
-  --radius-md:   18px;
-  --radius-lg:   24px;
-  --radius-xl:   28px;
-  --radius-pill: 999px;
-  --container:   1160px;
-  --font-body:   "Inter","Segoe UI",sans-serif;
-  --font-head:   "Manrope","Inter","Segoe UI",sans-serif;
+  --bg:        #0b0f0b;
+  --bg-elevated: #101611;
+  --bg-soft:   #131a15;
+  --bg-panel:  #151d17;
+  --bg-panel-2:#19221b;
+
+  --text:      #f3f5f2;
+  --text-soft: #dbe2dc;
+  --text-muted:#aab4ac;
+  --text-faint:#7f8a81;
+
+  --line:        rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.14);
+
+  --primary:      #18c964;
+  --primary-hover:#12b255;
+  --primary-deep: #0c8e42;
+  --primary-glow: rgba(24,201,100,0.24);
+
+  --warning:   #d2a42b;
+  --shadow-lg: 0 30px 80px rgba(0,0,0,0.45);
+  --shadow-md: 0 18px 40px rgba(0,0,0,0.28);
+  --shadow-sm: 0 10px 20px rgba(0,0,0,0.18);
+
+  --radius-xs:  10px;
+  --radius-sm:  14px;
+  --radius-md:  18px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+  --radius-pill:999px;
+
+  --container:      1180px;
+  --container-wide: 1260px;
+
+  --font-sans:    "Inter","Manrope","Segoe UI",sans-serif;
+  --font-display: "Manrope","Inter","Segoe UI",sans-serif;
+
+  --h1: clamp(2.6rem,5vw,4.8rem);
+  --h2: clamp(2rem,3vw,3.1rem);
+  --h3: clamp(1.35rem,2vw,1.8rem);
+  --h4: 1.1rem;
+  --body: 1rem;
+  --small: 0.92rem;
+
+  --tracking-display: -0.04em;
+  --tracking-title:   -0.02em;
 }
 
-/* ── RESET ── */
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ---------- RESET ---------- */
+*,*::before,*::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html,body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family:var(--font-sans); }
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  line-height: 1.65;
-  overflow-x: hidden;
+  line-height:1.6;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at top center, rgba(24,201,100,0.05), transparent 28%),
+    linear-gradient(180deg,#0a0f0b 0%,#0b100d 45%,#0b0f0b 100%);
 }
-img { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-button { font: inherit; border: 0; cursor: pointer; }
+img { display:block; max-width:100%; }
+a { color:inherit; text-decoration:none; }
+button,input,textarea,select { font:inherit; }
 
-/* ── LAYOUT ── */
-.wrap { width: min(100% - 40px, var(--container)); margin-inline: auto; }
-.section { padding: 88px 0; }
-.section--sm { padding: 56px 0; }
+/* ---------- GLOBAL LAYOUT ---------- */
+.site-shell { position:relative; isolation:isolate; }
+.container      { width:min(100% - 32px, var(--container)); margin-inline:auto; }
+.container-wide { width:min(100% - 32px, var(--container-wide)); margin-inline:auto; }
+.section { padding:96px 0; position:relative; }
+.section--tight { padding:56px 0; }
+.section--flush-top { padding-top:0; }
 
-/* ── EYEBROW ── */
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px;
+.section__eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  color:var(--primary); font-size:0.82rem; font-weight:700;
+  letter-spacing:0.14em; text-transform:uppercase; margin-bottom:14px;
 }
-.eyebrow__dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+.section__eyebrow::before {
+  content:""; width:24px; height:1.5px; border-radius:999px;
+  background:currentColor; opacity:0.9;
 }
 
-/* ── BUTTONS ── */
+.section__title {
+  margin:0; font-family:var(--font-display); font-size:var(--h2);
+  line-height:1.1; letter-spacing:var(--tracking-display); font-weight:800;
+  max-width:14ch;
+}
+.section__lead { margin-top:16px; max-width:62ch; color:var(--text-muted); font-size:1.02rem; }
+
+.centered { text-align:center; }
+.centered .section__title,.centered .section__lead { margin-inline:auto; }
+
+/* ---------- TOP NAV ---------- */
+.site-header {
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(14px);
+  background:linear-gradient(180deg,rgba(9,13,10,0.92) 0%,rgba(9,13,10,0.72) 100%);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.navbar {
+  display:flex; align-items:center; justify-content:space-between;
+  min-height:78px; gap:20px;
+}
+.brand { display:inline-flex; align-items:center; }
+.brand__logo { height:36px; width:auto; display:block; }
+
+.nav-links { display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0; }
+.nav-links a { font-size:0.95rem; color:var(--text-muted); transition:color 0.2s ease; }
+.nav-links a:hover { color:var(--text); }
+
+.nav-actions { display:flex; align-items:center; gap:12px; }
+
+/* ---------- BUTTONS ---------- */
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0 24px; height: 46px; border-radius: var(--radius-pill);
-  font-weight: 600; font-size: 0.95rem; transition: all 0.18s ease;
+  border:0; outline:0; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:48px; padding:0 22px; border-radius:var(--radius-pill); font-weight:700;
+  transition:transform 0.2s ease,box-shadow 0.2s ease,background 0.2s ease,color 0.2s ease,border-color 0.2s ease;
 }
-.btn--green {
-  background: var(--green); color: #fff;
-  box-shadow: 0 8px 20px rgba(40,199,111,0.22);
+.btn:hover { transform:translateY(-1px); }
+.btn--primary {
+  color:#fff;
+  background:linear-gradient(180deg,var(--primary) 0%,var(--primary-deep) 100%);
+  box-shadow:0 10px 24px rgba(24,201,100,0.18),inset 0 1px 0 rgba(255,255,255,0.14);
 }
-.btn--green:hover { background: var(--green-dark); transform: translateY(-1px); }
-.btn--outline {
-  border: 1px solid var(--line-md); color: var(--text-soft);
-  background: rgba(255,255,255,0.03);
+.btn--primary:hover { background:linear-gradient(180deg,#21d671 0%,#109548 100%); }
+.btn--ghost {
+  color:var(--text); background:rgba(255,255,255,0.03); border:1px solid var(--line);
 }
-.btn--outline:hover { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06); }
+.btn--ghost:hover { border-color:var(--line-strong); background:rgba(255,255,255,0.06); }
 
-/* ══════════════════════════════════════════
-   NAV
-══════════════════════════════════════════ */
-.site-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
+/* ---------- HERO ---------- */
+.hero { padding-top:28px; padding-bottom:52px; }
+.hero__media {
+  position:relative; border-radius:28px; overflow:hidden;
+  min-height:580px; box-shadow:var(--shadow-lg); background:#0f1511;
 }
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  height: 72px; gap: 24px;
+.hero__media::after {
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(180deg,rgba(8,12,9,0.08) 0%,rgba(8,12,9,0.25) 45%,rgba(8,12,9,0.80) 100%),
+    linear-gradient(90deg,rgba(8,12,9,0.18),rgba(8,12,9,0));
+  pointer-events:none;
 }
-.nav-logo img { height: 34px; width: auto; display: block; }
-.nav-links {
-  display: flex; align-items: center; gap: 32px;
+.hero__image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; }
+.hero__content {
+  position:relative; z-index:2;
+  display:grid; align-content:end; min-height:580px; padding:52px;
 }
-.nav-links a {
-  font-size: 0.92rem; color: var(--text-soft);
-  transition: color 0.18s ease; white-space: nowrap;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-cta { flex-shrink: 0; }
-
-/* ══════════════════════════════════════════
-   HERO
-══════════════════════════════════════════ */
-.hero { padding: 28px 0 64px; }
-.hero__frame {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  position: relative;
-  aspect-ratio: 16 / 7;
-  border: 1px solid var(--line-md);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-}
-.hero__frame img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center 40%;
-}
-.hero__frame::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(13,20,16,0) 40%, rgba(13,20,16,0.35) 100%);
-  pointer-events: none;
-}
-.hero__green-dot {
-  position: absolute; top: 16px; right: 16px; z-index: 2;
-  width: 14px; height: 14px; border-radius: 4px; background: var(--green);
-}
-.hero__body {
-  text-align: center; padding-top: 48px;
+.hero__inner { max-width:680px; }
+.hero__kicker {
+  display:inline-flex; margin-bottom:18px; padding:8px 16px;
+  border-radius:var(--radius-pill); color:#d7f9e5;
+  background:rgba(24,201,100,0.14); border:1px solid rgba(24,201,100,0.28);
+  font-size:0.83rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
 }
 .hero__title {
-  font-family: var(--font-head); font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;
-  color: var(--text); max-width: 18ch; margin-inline: auto;
+  margin:0; max-width:13ch; font-size:var(--h1); line-height:0.97;
+  font-weight:800; letter-spacing:var(--tracking-display); font-family:var(--font-display);
 }
-.hero__sub {
-  margin-top: 16px; max-width: 54ch; margin-inline: auto;
-  color: var(--text-muted); font-size: 1.02rem; line-height: 1.7;
+.hero__text { margin-top:18px; max-width:54ch; color:rgba(255,255,255,0.82); font-size:1.05rem; }
+.hero__actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+.hero__metrics {
+  margin-top:44px; display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;
 }
-.hero__actions {
-  margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+.metric {
+  padding:18px 18px 16px; border-radius:18px;
+  backdrop-filter:blur(10px); background:rgba(12,18,14,0.62);
+  border:1px solid rgba(255,255,255,0.07);
+}
+.metric__value { display:block; font-size:1.4rem; line-height:1; font-weight:800; color:var(--text); }
+.metric__label { display:block; margin-top:8px; color:var(--text-muted); font-size:0.88rem; }
+
+/* ---------- LOGOS TICKER ---------- */
+.logos-band {
+  padding:32px 0;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.logos-band__track {
+  display:flex; align-items:center; justify-content:center;
+  gap:48px; flex-wrap:wrap;
+}
+.logos-band__item {
+  font-family:var(--font-display); font-size:0.88rem; font-weight:700;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--text-faint); opacity:0.55; white-space:nowrap;
 }
 
-/* ── CLIENT LOGOS ── */
-.logos { padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.logos__track {
-  display: flex; align-items: center; justify-content: center;
-  gap: 48px; flex-wrap: wrap;
+/* ---------- CARD SYSTEM ---------- */
+.card {
+  background:linear-gradient(180deg,var(--bg-panel) 0%,var(--bg-panel-2) 100%);
+  border:1px solid var(--line); border-radius:var(--radius-md); box-shadow:var(--shadow-sm);
 }
-.logos__item {
-  font-family: var(--font-head); font-size: 0.9rem; font-weight: 700;
-  color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase;
-  opacity: 0.55; white-space: nowrap;
+.card__body { padding:24px; }
+.card__title { margin:0 0 10px; font-size:1.15rem; line-height:1.2; letter-spacing:var(--tracking-title); font-weight:700; }
+.card__text { margin:0; color:var(--text-muted); font-size:0.98rem; }
+.card__icon {
+  width:46px; height:46px; display:grid; place-items:center; margin-bottom:18px;
+  border-radius:14px; border:1px solid rgba(255,255,255,0.1);
+  color:var(--primary);
 }
+.card__icon--green  { background:rgba(24,201,100,0.12); border-color:rgba(24,201,100,0.22); color:var(--primary); }
+.card__icon--red    { background:rgba(220,80,70,0.12);  border-color:rgba(220,80,70,0.22);  color:#e05c4a; }
+.card__icon--orange { background:rgba(210,130,40,0.12); border-color:rgba(210,130,40,0.22); color:#d08a3a; }
 
-/* ══════════════════════════════════════════
-   WHO WE ARE
-══════════════════════════════════════════ */
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: start;
+/* ---------- ABOUT / WHO WE ARE ---------- */
+.about-grid { display:grid; grid-template-columns:0.96fr 1.04fr; gap:28px; align-items:center; }
+.media-frame {
+  position:relative; overflow:hidden; border-radius:24px;
+  background:#111814; border:1px solid var(--line); box-shadow:var(--shadow-md);
 }
-.about-img {
-  border-radius: var(--radius-lg); overflow: hidden;
-  border: 1px solid var(--line); aspect-ratio: 4/3;
-  box-shadow: 0 20px 48px rgba(0,0,0,0.35);
-}
-.about-img img { width: 100%; height: 100%; object-fit: cover; }
-.about-copy h2 {
-  font-family: var(--font-head); font-size: clamp(1.9rem, 3vw, 2.6rem);
-  font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 18px;
-}
-.about-copy p { color: var(--text-soft); font-size: 0.98rem; line-height: 1.75; }
+.media-frame img { width:100%; height:100%; object-fit:cover; }
+.media-frame--portrait { min-height:440px; }
 
-.pillars-label {
-  margin-top: 40px; margin-bottom: 18px;
-  font-size: 0.88rem; color: var(--text-muted);
-}
-.pillars-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-}
+.pillar-cards { margin-top:28px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
 .pillar-card {
-  padding: 22px 20px; border-radius: var(--radius-md);
-  background: var(--bg-card); border: 1px solid var(--line);
+  padding:22px 18px; border-radius:18px;
+  background:linear-gradient(180deg,#121914 0%,#171f18 100%); border:1px solid var(--line);
 }
-.pillar-icon {
-  width: 36px; height: 36px; margin-bottom: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-}
-.pillar-card h4 {
-  font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin-bottom: 8px;
-}
-.pillar-card p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; }
+.pillar-card__icon { display:flex; margin-bottom:14px; }
+.pillar-card h4 { margin:0 0 8px; font-size:1rem; font-weight:700; }
+.pillar-card p  { margin:0; color:var(--text-muted); font-size:0.9rem; line-height:1.6; }
 
-/* ══════════════════════════════════════════
-   SERVICES — HOW WE DELIVER
-══════════════════════════════════════════ */
-.services-intro { text-align: center; margin-bottom: 48px; }
-.services-intro h2 {
-  font-family: var(--font-head); font-size: clamp(1.9rem, 3vw, 2.6rem);
-  font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px;
+/* ---------- SERVICES / HOW WE DELIVER ---------- */
+.feature-grid { display:grid; gap:20px; margin-top:40px; }
+.feature-card {
+  overflow:hidden; border-radius:22px; border:1px solid var(--line);
+  background:linear-gradient(180deg,#121914 0%,#181f19 100%);
+  display:grid; grid-template-columns:0.95fr 1.05fr; min-height:280px;
 }
-.services-intro p { color: var(--text-muted); max-width: 58ch; margin-inline: auto; }
+.feature-card--rev { grid-template-columns:1.05fr 0.95fr; }
+.feature-card--rev .feature-card__media { order:2; }
+.feature-card--rev .feature-card__content { order:1; }
+.feature-card__media { min-height:100%; }
+.feature-card__media img { width:100%; height:100%; object-fit:cover; }
+.feature-card__content { padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
+.feature-card__title { margin:0 0 10px; font-size:1.22rem; line-height:1.15; font-weight:700; letter-spacing:var(--tracking-title); }
+.feature-card__text { margin:0 0 18px; color:var(--text-muted); }
+.feature-card__list { margin:0; padding:0; list-style:none; display:grid; gap:10px; }
+.feature-card__list li { position:relative; padding-left:18px; color:var(--text-soft); font-size:0.94rem; }
+.feature-card__list li::before {
+  content:""; position:absolute; left:0; top:0.72em;
+  width:8px; height:8px; border-radius:50%; background:var(--primary); transform:translateY(-50%);
+}
+.services-cta { text-align:center; margin-top:36px; }
 
-.service-card {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-  border-radius: var(--radius-xl); overflow: hidden;
-  border: 1px solid var(--line); margin-bottom: 20px;
-  background: var(--bg-card);
-}
-.service-card--rev { direction: rtl; }
-.service-card--rev > * { direction: ltr; }
-.service-card__img { aspect-ratio: 4/3; overflow: hidden; }
-.service-card__img img { width: 100%; height: 100%; object-fit: cover; }
-.service-card__body {
-  padding: 40px 36px; display: flex; flex-direction: column; justify-content: center;
-}
-.service-card__body h3 {
-  font-family: var(--font-head); font-size: 1.25rem; font-weight: 700;
-  line-height: 1.25; margin-bottom: 12px;
-}
-.service-card__body p { color: var(--text-muted); font-size: 0.96rem; line-height: 1.7; margin-bottom: 18px; }
-.service-card__list { display: grid; gap: 8px; }
-.service-card__list li {
-  position: relative; padding-left: 16px;
-  color: var(--text-soft); font-size: 0.9rem;
-}
-.service-card__list li::before {
-  content: ""; position: absolute; left: 0; top: 0.7em;
-  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-  transform: translateY(-50%);
-}
+/* ---------- TEAM / EXPERTS ---------- */
+.team-header { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; margin-bottom:36px; }
+.team-header h2 { margin:0; font-family:var(--font-display); font-size:var(--h2); line-height:1.1; letter-spacing:var(--tracking-display); font-weight:800; }
+.team-header p  { margin:0; color:var(--text-muted); font-size:1.02rem; }
 
-.services-cta { text-align: center; margin-top: 40px; }
+.team-grid-top    { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-bottom:20px; }
+.team-grid-bottom { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; max-width:calc(66.66% - 10px); }
+.team-card { border-radius:20px; overflow:hidden; border:1px solid var(--line); background:#121814; aspect-ratio:3/4; }
+.team-card img { width:100%; height:100%; object-fit:cover; object-position:top center; }
 
-/* ══════════════════════════════════════════
-   TEAM
-══════════════════════════════════════════ */
-.team-header {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;
-  margin-bottom: 40px;
-}
-.team-header h2 {
-  font-family: var(--font-head); font-size: clamp(1.9rem, 3vw, 2.6rem);
-  font-weight: 800; letter-spacing: -0.03em;
-}
-.team-header p { color: var(--text-muted); font-size: 0.98rem; line-height: 1.7; }
-
-.team-grid-top {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px;
-}
-.team-grid-bottom {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-  max-width: calc(66.66% - 10px);
-}
-.team-photo {
-  border-radius: var(--radius-lg); overflow: hidden;
-  border: 1px solid var(--line); background: var(--bg-card);
-  aspect-ratio: 3/4;
-}
-.team-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-}
-
-/* ══════════════════════════════════════════
-   QUOTE BANNER
-══════════════════════════════════════════ */
-.quote-card {
-  border-radius: var(--radius-xl); overflow: hidden;
-  position: relative; padding: 72px 48px;
-  border: 1px solid var(--line);
-}
-.quote-card__bg {
-  position: absolute; inset: 0;
+/* ---------- QUOTE / MID CTA BANNER ---------- */
+.quote-banner {
+  position:relative; overflow:hidden; border-radius:28px; padding:80px 40px;
+  border:1px solid var(--line);
   background:
-    linear-gradient(rgba(13,20,16,0.72), rgba(13,20,16,0.72)),
+    linear-gradient(180deg,rgba(9,12,10,0.46),rgba(9,12,10,0.72)),
     url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1600&auto=format&fit=crop&q=80") center/cover no-repeat;
+  box-shadow:var(--shadow-md);
 }
-.quote-card__text {
-  position: relative; z-index: 1;
-  text-align: center; max-width: 700px; margin-inline: auto;
-  font-family: var(--font-head); font-size: clamp(1.3rem, 2.2vw, 1.9rem);
-  font-weight: 700; line-height: 1.35; letter-spacing: -0.02em;
+.quote-banner__text {
+  max-width:30ch; margin:0 auto; text-align:center;
+  font-size:clamp(1.5rem,2.5vw,2.5rem); line-height:1.2;
+  font-weight:700; letter-spacing:-0.03em; font-family:var(--font-display);
 }
 
-/* ══════════════════════════════════════════
-   SUSTAINABILITY
-══════════════════════════════════════════ */
-.sustain-intro { margin-bottom: 56px; }
-.sustain-intro h2 {
-  font-family: var(--font-head); font-size: clamp(1.9rem, 3vw, 2.6rem);
-  font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; max-width: 22ch;
-}
-.sustain-intro p { color: var(--text-muted); max-width: 56ch; }
-
+/* ---------- SUSTAINABILITY PILLARS ---------- */
 .sustain-pillar {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
-  align-items: center; margin-bottom: 64px;
+  display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-bottom:64px;
 }
-.sustain-pillar--rev .sustain-pillar__img { order: 2; }
-.sustain-pillar--rev .sustain-pillar__copy { order: 1; }
-.sustain-pillar__img {
-  border-radius: var(--radius-lg); overflow: hidden;
-  border: 1px solid var(--line); aspect-ratio: 4/3;
+.sustain-pillar--rev .sustain-pillar__media { order:2; }
+.sustain-pillar--rev .sustain-pillar__copy  { order:1; }
+.sustain-pillar__media {
+  border-radius:var(--radius-lg); overflow:hidden;
+  border:1px solid var(--line); aspect-ratio:4/3; box-shadow:var(--shadow-md);
 }
-.sustain-pillar__img img { width: 100%; height: 100%; object-fit: cover; }
+.sustain-pillar__media img { width:100%; height:100%; object-fit:cover; }
 .sustain-pillar__label {
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:0.8rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--text-muted); margin-bottom:12px;
 }
-.sustain-pillar__label span { color: var(--green); }
+.sustain-pillar__label span { width:6px; height:6px; border-radius:50%; background:var(--primary); display:inline-block; }
 .sustain-pillar__copy h3 {
-  font-family: var(--font-head); font-size: 1.4rem; font-weight: 700;
-  margin-bottom: 16px; letter-spacing: -0.02em;
+  margin:0 0 14px; font-family:var(--font-display); font-size:1.5rem;
+  font-weight:700; letter-spacing:-0.02em;
 }
-.sustain-pillar__copy > p { color: var(--text-muted); margin-bottom: 20px; }
-.sustain-list { display: grid; gap: 10px; }
-.sustain-list li {
-  position: relative; padding-left: 18px;
-  color: var(--text-soft); font-size: 0.93rem; line-height: 1.55;
-}
+.sustain-pillar__copy > p { margin:0 0 20px; color:var(--text-muted); }
+.sustain-list { padding:0; margin:0; list-style:none; display:grid; gap:10px; }
+.sustain-list li { position:relative; padding-left:18px; color:var(--text-soft); font-size:0.93rem; line-height:1.6; }
 .sustain-list li::before {
-  content: ""; position: absolute; left: 0; top: 0.65em;
-  width: 7px; height: 7px; border-radius: 2px; background: var(--green);
-  transform: translateY(-50%);
+  content:""; position:absolute; left:0; top:0.65em;
+  width:7px; height:7px; border-radius:2px; background:var(--primary); transform:translateY(-50%);
 }
-.sustain-list strong { color: var(--text); font-weight: 600; }
+.sustain-list strong { color:var(--text); font-weight:600; }
 
-/* ══════════════════════════════════════════
-   SDG TILES
-══════════════════════════════════════════ */
-.sdg-intro {
-  text-align: center; margin-bottom: 40px;
-}
-.sdg-intro h2 {
-  font-family: var(--font-head); font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 800; letter-spacing: -0.02em; max-width: 26ch; margin-inline: auto;
-}
-.sdg-row-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
-.sdg-row-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+/* ---------- SDG TILES ---------- */
+.sdg-intro { text-align:center; margin-bottom:36px; }
+.sdg-intro h2 { font-family:var(--font-display); font-size:clamp(1.5rem,2.5vw,2rem); font-weight:800; letter-spacing:-0.02em; max-width:28ch; margin-inline:auto; }
+.sdg-row-top    { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+.sdg-row-bottom { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
 .sdg-tile {
-  border-radius: var(--radius-lg); padding: 24px 22px 22px;
-  min-height: 160px; display: flex; flex-direction: column; justify-content: space-between;
-  color: #fff;
+  min-height:160px; border-radius:20px; padding:22px 20px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  color:#fff; box-shadow:var(--shadow-sm);
 }
-.sdg-tile__num { font-size: 2rem; font-weight: 800; line-height: 1; font-family: var(--font-head); }
-.sdg-tile__name { font-size: 0.9rem; font-weight: 700; line-height: 1.3; max-width: 18ch; text-transform: uppercase; letter-spacing: 0.04em; }
-.sdg-tile__icon { font-size: 1.8rem; margin-top: 8px; }
-.sdg--7  { background: linear-gradient(135deg, #ddb80b, #a88900); }
-.sdg--8  { background: linear-gradient(135deg, #c0392b, #8e1c1c); }
-.sdg--9  { background: linear-gradient(135deg, #2ecc71, #1a8c4a); }
-.sdg--12 { background: linear-gradient(135deg, #8e44ad, #5d2a82); }
-.sdg--13 { background: linear-gradient(135deg, #c0392b, #7f2915); }
+.sdg-tile__number { font-size:2rem; line-height:1; font-weight:800; font-family:var(--font-display); }
+.sdg-tile__title  { font-size:0.9rem; line-height:1.28; font-weight:700; max-width:16ch; text-transform:uppercase; letter-spacing:0.04em; }
+.sdg-tile__icon   { font-size:1.8rem; }
+.sdg-tile--7  { background:linear-gradient(135deg,#ddb80b,#a88900); }
+.sdg-tile--8  { background:linear-gradient(135deg,#c0392b,#8e1c1c); }
+.sdg-tile--9  { background:linear-gradient(135deg,#2ecc71,#1a8c4a); }
+.sdg-tile--12 { background:linear-gradient(135deg,#8e44ad,#5d2a82); }
+.sdg-tile--13 { background:linear-gradient(135deg,#c0392b,#7f2915); }
 
-/* ══════════════════════════════════════════
-   CONTACT / CTA
-══════════════════════════════════════════ */
-.contact-section {
-  text-align: center;
-  border-top: 1px solid var(--line);
+/* ---------- CTA / CONTACT BAND ---------- */
+.cta-band {
+  text-align:center; padding:96px 24px;
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(circle at center,rgba(24,201,100,0.07),transparent 32%),
+    linear-gradient(180deg,#0b100c 0%,#0d120e 100%);
 }
-.contact-section h2 {
-  font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800; letter-spacing: -0.04em; margin-bottom: 14px;
+.cta-band__eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:0.8rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--text-muted); margin-bottom:16px;
 }
-.contact-section p { color: var(--text-muted); max-width: 48ch; margin-inline: auto; margin-bottom: 32px; }
-.contact-details {
-  display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;
-}
-.contact-item {
-  display: flex; align-items: center; gap: 10px;
-  color: var(--text-soft); font-size: 0.98rem;
-}
-.contact-item svg { color: var(--green); flex-shrink: 0; }
+.cta-band__eyebrow span { width:6px; height:6px; border-radius:50%; background:var(--primary); display:inline-block; }
+.cta-band__title { margin:0; font-size:clamp(2rem,3vw,3rem); line-height:1.05; letter-spacing:-0.04em; font-weight:800; font-family:var(--font-display); }
+.cta-band__text  { margin:16px auto 0; max-width:52ch; color:var(--text-muted); }
+.cta-band__contact { margin-top:28px; display:flex; align-items:center; justify-content:center; gap:36px; flex-wrap:wrap; }
+.cta-band__contact-item { display:flex; align-items:center; gap:10px; color:var(--text-soft); font-size:0.98rem; }
+.cta-band__contact-item svg { color:var(--primary); flex-shrink:0; }
+.cta-band__actions { margin-top:32px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
 
-/* ══════════════════════════════════════════
-   FOOTER
-══════════════════════════════════════════ */
-.site-footer {
-  padding: 40px 0 32px;
-  border-top: 1px solid var(--line);
-}
-.footer-inner {
-  display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
-}
-.footer-logo img { height: 30px; width: auto; }
-.footer-nav {
-  display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: center;
-}
-.footer-nav a { font-size: 0.88rem; color: var(--text-muted); transition: color 0.18s; }
-.footer-nav a:hover { color: var(--text); }
-.footer-copy { font-size: 0.82rem; color: var(--text-muted); }
+/* ---------- FOOTER ---------- */
+.site-footer { padding:28px 0 40px; }
+.footer { display:grid; gap:16px; justify-items:center; text-align:center; }
+.footer__logo img { height:30px; width:auto; }
+.footer__nav  { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
+.footer__nav a { font-size:0.88rem; color:var(--text-muted); transition:color 0.18s; }
+.footer__nav a:hover { color:var(--text); }
+.footer__meta { color:var(--text-faint); font-size:0.88rem; }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════ */
-@media (max-width: 1020px) {
-  .about-grid { grid-template-columns: 1fr; gap: 32px; }
-  .service-card { grid-template-columns: 1fr; }
-  .service-card--rev { direction: ltr; }
-  .service-card__img { aspect-ratio: 16/7; }
-  .team-header { grid-template-columns: 1fr; gap: 16px; }
-  .team-grid-bottom { max-width: 100%; }
-  .sustain-pillar { grid-template-columns: 1fr; gap: 28px; }
-  .sustain-pillar--rev .sustain-pillar__img { order: 0; }
-  .sustain-pillar--rev .sustain-pillar__copy { order: 0; }
-}
-@media (max-width: 720px) {
-  .section { padding: 64px 0; }
-  .nav-links { display: none; }
-  .hero__frame { aspect-ratio: 4/3; }
-  .pillars-grid { grid-template-columns: 1fr; }
-  .team-grid-top { grid-template-columns: repeat(2, 1fr); }
-  .team-grid-bottom { grid-template-columns: 1fr; }
-  .sdg-row-top { grid-template-columns: repeat(2, 1fr); }
-  .sdg-row-bottom { grid-template-columns: 1fr; }
-  .quote-card { padding: 48px 24px; }
-  .contact-details { flex-direction: column; gap: 16px; }
-}
-@media (max-width: 480px) {
-  .wrap { width: min(100% - 28px, var(--container)); }
-  .hero__frame { aspect-ratio: 1/1; }
-  .team-grid-top { grid-template-columns: 1fr; }
-}
+/* ---------- UTILITIES ---------- */
+.text-primary { color:var(--primary); }
 
-/* ── ANIMATIONS ── */
-.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+/* ---------- ANIMATION ---------- */
+.reveal-up { opacity:0; transform:translateY(22px); }
+.reveal-up.in-view { animation:revealUp 0.7s ease forwards; }
+@keyframes revealUp { to { opacity:1; transform:translateY(0); } }
 
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1100px) {
+  .hero__metrics { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .feature-card  { grid-template-columns:1fr; min-height:auto; }
+  .feature-card--rev .feature-card__media,.feature-card--rev .feature-card__content { order:0; }
+  .feature-card__media { min-height:260px; }
+  .team-grid-top { grid-template-columns:repeat(3,1fr); }
+  .sdg-row-top   { grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width:900px) {
+  .about-grid     { grid-template-columns:1fr; }
+  .sustain-pillar { grid-template-columns:1fr; gap:28px; margin-bottom:48px; }
+  .sustain-pillar--rev .sustain-pillar__media,.sustain-pillar--rev .sustain-pillar__copy { order:0; }
+  .team-header    { grid-template-columns:1fr; gap:16px; }
+  .team-grid-bottom { max-width:100%; }
+  .nav-links      { display:none; }
+  .hero__content,.quote-banner,.cta-band { padding-left:24px; padding-right:24px; }
+  .pillar-cards   { grid-template-columns:1fr; }
+}
+@media (max-width:640px) {
+  .section { padding:72px 0; }
+  .hero__media,.hero__content { min-height:500px; }
+  .hero__content { padding:22px; }
+  .hero__title { font-size:clamp(2.2rem,11vw,3.2rem); }
+  .hero__metrics { grid-template-columns:repeat(2,1fr); }
+  .team-grid-top    { grid-template-columns:repeat(2,1fr); }
+  .team-grid-bottom { grid-template-columns:repeat(2,1fr); }
+  .sdg-row-top    { grid-template-columns:repeat(2,1fr); }
+  .sdg-row-bottom { grid-template-columns:1fr; }
+  .quote-banner   { padding:54px 20px; border-radius:22px; }
+  .navbar         { min-height:70px; }
+  .btn            { min-height:44px; padding-inline:18px; }
+}
   </style>
 </head>
 <body>
+<div class="site-shell">
 
-<!-- ════════════════════════════ NAV ════════════════════════════ -->
-<nav class="site-nav">
-  <div class="wrap">
-    <div class="nav-inner">
-      <a class="nav-logo" href="#top">
-        <img src="brand_assets/Logo.png" alt="Han&amp;Dan Energy Services Limited" />
+  <!-- ── NAV ── -->
+  <header class="site-header">
+    <nav class="navbar container">
+      <a class="brand" href="#hero">
+        <img class="brand__logo" src="brand_assets/Logo.png" alt="Han&amp;Dan Energy Services Limited" />
       </a>
       <ul class="nav-links">
         <li><a href="#about">About Us</a></li>
@@ -452,480 +423,444 @@ button { font: inherit; border: 0; cursor: pointer; }
         <li><a href="#sustainability">Sustainability</a></li>
         <li><a href="#contact">Contact Us</a></li>
       </ul>
-      <div class="nav-cta">
-        <a href="#contact" class="btn btn--green">Contact us</a>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn--primary">Contact us</a>
       </div>
-    </div>
-  </div>
-</nav>
+    </nav>
+  </header>
 
-<!-- ════════════════════════════ HERO ════════════════════════════ -->
-<section class="hero" id="top">
-  <div class="wrap">
-    <div class="hero__frame fade-up">
-      <img
-        src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1600&auto=format&fit=crop&q=85"
-        alt="Offshore oil and gas platform at sunset"
-        loading="eager"
-      />
-      <div class="hero__green-dot"></div>
-    </div>
-    <div class="hero__body fade-up">
-      <h1 class="hero__title">Powering Progress in Oil&nbsp;&amp;&nbsp;Gas</h1>
-      <p class="hero__sub">
-        We provide reliable and tailored solutions for the evolving Oil &amp; Gas industry,
-        delivering real value from strategy to execution.
-      </p>
-      <div class="hero__actions">
-        <a href="#about" class="btn btn--green">Learn more</a>
-        <a href="#contact" class="btn btn--outline">Get in touch</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ CLIENT LOGOS ════════════════════════════ -->
-<div class="logos">
-  <div class="wrap">
-    <div class="logos__track">
-      <span class="logos__item">Tenoll</span>
-      <span class="logos__item">ExxonMobil</span>
-      <span class="logos__item">TotalEnergies</span>
-      <span class="logos__item">Shell</span>
-      <span class="logos__item">Seplat</span>
-      <span class="logos__item">Tenoll</span>
-      <span class="logos__item">ExxonMobil</span>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════ WHO WE ARE ════════════════════════════ -->
-<section class="section" id="about">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-img fade-up">
+  <!-- ── HERO ── -->
+  <section class="hero section" id="hero">
+    <div class="container-wide">
+      <div class="hero__media">
         <img
-          src="https://images.unsplash.com/photo-1504711331083-9c895941bf81?w=900&auto=format&fit=crop&q=80"
-          alt="Han&amp;Dan engineers on-site"
-          loading="lazy"
+          class="hero__image"
+          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1600&auto=format&fit=crop&q=80"
+          alt="Offshore oil and gas platform at sunset"
+          loading="eager"
         />
-      </div>
-      <div class="fade-up">
-        <div class="eyebrow">About Us <span class="eyebrow__dot"></span></div>
-        <h2>Who We Are</h2>
-        <p>
-          At Han&amp;Dan, we specialise in providing reliable &amp; tailored industrial
-          solutions and services to assure the needs of the Oil &amp; Gas industries.
-          Our expertise lies in deep industry knowledge, trusted networks, and a passion
-          for exceeding expectations all while ensuring safety, efficiency and reliability.
-          We are driven by a commitment to excellence and client satisfaction, offering
-          results-focused approach that ensures every solution puts our client at an advantage.
-        </p>
-        <p class="pillars-label">Our foundation is built on three pillars:</p>
-        <div class="pillars-grid">
-          <div class="pillar-card">
-            <div class="pillar-icon" style="color:#28c76f;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                <path d="M12 2v20M2 12h20"/>
-              </svg>
+        <div class="hero__content">
+          <div class="hero__inner reveal-up">
+            <span class="hero__kicker">Trusted Energy Partner</span>
+            <h1 class="hero__title">Powering Progress in Oil &amp; Gas</h1>
+            <p class="hero__text">
+              We provide reliable and tailored solutions for the evolving Oil &amp; Gas
+              industry, delivering real value from strategy to execution.
+            </p>
+            <div class="hero__actions">
+              <a href="#services" class="btn btn--primary">Learn More</a>
+              <a href="#contact" class="btn btn--ghost">Get in Touch</a>
             </div>
-            <h4>Expertise</h4>
-            <p>Skilled professionals with deep Oil &amp; Gas experience, solving complex challenges with precision.</p>
-          </div>
-          <div class="pillar-card">
-            <div class="pillar-icon" style="color:#e05c4a;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                <path d="M18 6L6 18M6 6l12 12"/>
-              </svg>
+            <div class="hero__metrics">
+              <div class="metric">
+                <span class="metric__value">15+</span>
+                <span class="metric__label">Years Experience</span>
+              </div>
+              <div class="metric">
+                <span class="metric__value">200+</span>
+                <span class="metric__label">Projects Delivered</span>
+              </div>
+              <div class="metric">
+                <span class="metric__value">98%</span>
+                <span class="metric__label">Client Retention</span>
+              </div>
+              <div class="metric">
+                <span class="metric__value">0</span>
+                <span class="metric__label">Lost-Time Incidents</span>
+              </div>
             </div>
-            <h4>Safety &amp; Quality</h4>
-            <p>Upholding the highest standards to protect people, assets, and the environment.</p>
-          </div>
-          <div class="pillar-card">
-            <div class="pillar-icon" style="color:#e08c3a;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/>
-              </svg>
-            </div>
-            <h4>Client Focus</h4>
-            <p>Tailored solutions that deliver value, build trust, and strengthen long-term partnerships.</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ════════════════════════════ SERVICES ════════════════════════════ -->
-<section class="section" id="services">
-  <div class="wrap">
-    <div class="services-intro fade-up">
-      <div class="eyebrow">Our services <span class="eyebrow__dot"></span></div>
-      <h2>Here's How We Deliver</h2>
-      <p>
-        Our services are designed to enhance operational efficiency,
-        reduce risk, and create measurable value for our clients.
-      </p>
-    </div>
-
-    <!-- Service 1 -->
-    <div class="service-card fade-up">
-      <div class="service-card__img">
-        <img
-          src="https://images.unsplash.com/photo-1581093582936-d30cf5b3cb55?w=800&auto=format&fit=crop&q=80"
-          alt="OEM Wellhead Systems"
-          loading="lazy"
-        />
+  <!-- ── CLIENT LOGOS ── -->
+  <div class="logos-band">
+    <div class="container">
+      <div class="logos-band__track">
+        <span class="logos-band__item">Tenoll</span>
+        <span class="logos-band__item">ExxonMobil</span>
+        <span class="logos-band__item">TotalEnergies</span>
+        <span class="logos-band__item">Shell</span>
+        <span class="logos-band__item">Seplat</span>
+        <span class="logos-band__item">Tenoll</span>
+        <span class="logos-band__item">ExxonMobil</span>
       </div>
-      <div class="service-card__body">
-        <h3>OEM Wellhead Systems &amp; Services</h3>
-        <p>
-          We serve as the OEM's touchpoint, delivering high-quality wellhead
-          systems and services for IOCs and NOCs. Partnering with leading
-          manufacturers, we provide durable equipment with reliable installation,
-          maintenance, and support.
+    </div>
+  </div>
+
+  <!-- ── WHO WE ARE ── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="media-frame media-frame--portrait reveal-up">
+          <img
+            src="https://images.unsplash.com/photo-1504711331083-9c895941bf81?w=800&auto=format&fit=crop&q=80"
+            alt="Han&Dan engineers on-site"
+            loading="lazy"
+          />
+        </div>
+        <div class="reveal-up">
+          <span class="section__eyebrow">About Us</span>
+          <h2 class="section__title">Who We Are</h2>
+          <p class="section__lead">
+            At Han&amp;Dan, we specialise in providing reliable &amp; tailored industrial
+            solutions and services to assure the needs of the Oil &amp; Gas industries.
+            Our expertise lies in deep industry knowledge, trusted networks, and a passion
+            for exceeding expectations all while ensuring safety, efficiency and reliability.
+            We are driven by a commitment to excellence and client satisfaction, offering a
+            results-focused approach that ensures every solution puts our client at an advantage.
+          </p>
+          <p style="margin-top:24px; color:var(--text-muted); font-size:0.92rem;">Our foundation is built on three pillars:</p>
+          <div class="pillar-cards">
+            <div class="pillar-card">
+              <div class="pillar-card__icon">
+                <div class="card__icon card__icon--green">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>
+                </div>
+              </div>
+              <h4>Expertise</h4>
+              <p>Skilled professionals with deep Oil &amp; Gas experience, solving complex challenges with precision.</p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-card__icon">
+                <div class="card__icon card__icon--red">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+              </div>
+              <h4>Safety &amp; Quality</h4>
+              <p>Upholding the highest standards to protect people, assets, and the environment.</p>
+            </div>
+            <div class="pillar-card">
+              <div class="pillar-card__icon">
+                <div class="card__icon card__icon--orange">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+                </div>
+              </div>
+              <h4>Client Focus</h4>
+              <p>Tailored solutions that deliver value, build trust, and strengthen long-term partnerships.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE DELIVER (SERVICES) ── -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="centered reveal-up">
+        <span class="section__eyebrow">Our Services</span>
+        <h2 class="section__title" style="max-width:100%;">Here's How We Deliver</h2>
+        <p class="section__lead">
+          Our services are designed to enhance operational efficiency,
+          reduce risk, and create measurable value for our clients.
         </p>
-        <ul class="service-card__list">
-          <li>Wellhead equipment supply &amp; installation</li>
-          <li>Maintenance &amp; technical support</li>
-          <li>IOC &amp; NOC partnership models</li>
-        </ul>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card reveal-up">
+          <div class="feature-card__media">
+            <img
+              src="https://images.unsplash.com/photo-1581093582936-d30cf5b3cb55?w=700&auto=format&fit=crop&q=80"
+              alt="OEM Wellhead Systems"
+              loading="lazy"
+            />
+          </div>
+          <div class="feature-card__content">
+            <h3 class="feature-card__title">OEM Wellhead Systems &amp; Services</h3>
+            <p class="feature-card__text">
+              We serve as the OEM's touchpoint, delivering high-quality wellhead systems
+              and services for IOCs and NOCs. Partnering with leading manufacturers, we
+              provide durable equipment with reliable installation, maintenance, and support.
+            </p>
+            <ul class="feature-card__list">
+              <li>Wellhead equipment supply &amp; installation</li>
+              <li>Maintenance &amp; technical support</li>
+              <li>IOC &amp; NOC partnership models</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-card feature-card--rev reveal-up">
+          <div class="feature-card__media">
+            <img
+              src="https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=700&auto=format&fit=crop&q=80"
+              alt="Oil Tools and Materials"
+              loading="lazy"
+            />
+          </div>
+          <div class="feature-card__content">
+            <h3 class="feature-card__title">Oil Tools &amp; Materials Replacement</h3>
+            <p class="feature-card__text">
+              We offer dependable and prompt replacement of essential oil tools and supplies.
+              Our service ensures approved, high-quality equipment and replacement parts from
+              reliable manufacturers, reducing downtime and increasing productivity.
+            </p>
+            <ul class="feature-card__list">
+              <li>Critical tool &amp; materials supply</li>
+              <li>OEM-approved spare parts</li>
+              <li>Rapid procurement &amp; logistics</li>
+            </ul>
+          </div>
+        </div>
+        <div class="feature-card reveal-up">
+          <div class="feature-card__media">
+            <img
+              src="https://images.unsplash.com/photo-1504711331083-9c895941bf81?w=700&auto=format&fit=crop&q=80"
+              alt="Oil and Gas Manpower"
+              loading="lazy"
+            />
+          </div>
+          <div class="feature-card__content">
+            <h3 class="feature-card__title">Oil &amp; Gas Manpower Supply and Training</h3>
+            <p class="feature-card__text">
+              We provide skilled professionals and industry-leading training for the oil and
+              gas sector. From on-site experts to tailored workforce upskilling, we deliver
+              reliable talent partnering with you to build a smarter, stronger workforce.
+            </p>
+            <ul class="feature-card__list">
+              <li>Skilled manpower placement</li>
+              <li>On-site &amp; remote training programmes</li>
+              <li>Workforce development partnerships</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="services-cta reveal-up">
+        <a href="#contact" class="btn btn--primary">Contact us today</a>
       </div>
     </div>
+  </section>
 
-    <!-- Service 2 (reversed) -->
-    <div class="service-card service-card--rev fade-up">
-      <div class="service-card__img">
-        <img
-          src="https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=800&auto=format&fit=crop&q=80"
-          alt="Oil Tools and Materials"
-          loading="lazy"
-        />
-      </div>
-      <div class="service-card__body">
-        <h3>Oil Tools &amp; Materials Replacement</h3>
+  <!-- ── MEET OUR EXPERTS ── -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="team-header reveal-up">
+        <div>
+          <span class="section__eyebrow">Our Team</span>
+          <h2>Meet Our Experts</h2>
+        </div>
         <p>
-          We offer dependable and prompt replacement of essential oil tools and
-          supplies. Our service ensures approved, high-quality equipment and
-          replacement parts from reliable manufacturers, reducing downtime and
-          increasing productivity.
+          A team of skilled professionals dedicated to delivering excellence,
+          innovation, and reliable solutions across every project.
         </p>
-        <ul class="service-card__list">
-          <li>Critical tool &amp; materials supply</li>
-          <li>OEM-approved spare parts</li>
-          <li>Rapid procurement &amp; logistics</li>
-        </ul>
+      </div>
+      <div class="team-grid-top">
+        <div class="team-card reveal-up">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=80" alt="Executive" loading="lazy" />
+        </div>
+        <div class="team-card reveal-up">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80" alt="Technical Director" loading="lazy" />
+        </div>
+        <div class="team-card reveal-up">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&auto=format&fit=crop&q=80" alt="Head of HSE" loading="lazy" />
+        </div>
+      </div>
+      <div class="team-grid-bottom">
+        <div class="team-card reveal-up">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80" alt="Operations Manager" loading="lazy" />
+        </div>
+        <div class="team-card reveal-up">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80" alt="Business Development" loading="lazy" />
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Service 3 -->
-    <div class="service-card fade-up">
-      <div class="service-card__img">
-        <img
-          src="https://images.unsplash.com/photo-1504711331083-9c895941bf81?w=800&auto=format&fit=crop&q=80"
-          alt="Oil and Gas Manpower"
-          loading="lazy"
-        />
-      </div>
-      <div class="service-card__body">
-        <h3>Oil &amp; Gas Manpower Supply and Training</h3>
-        <p>
-          We provide skilled professionals and industry-leading training for the
-          oil and gas sector. From on-site experts to tailored workforce upskilling,
-          we deliver reliable talent from diverse skill sets across every discipline,
-          partnering with you to build a smarter, stronger workforce.
+  <!-- ── QUOTE BANNER ── -->
+  <section class="section--tight">
+    <div class="container-wide">
+      <div class="quote-banner reveal-up">
+        <p class="quote-banner__text">
+          "At Han&amp;Dan; profitability and responsibility go hand-in-hand.
+          We align business growth with sustainable development across Nigeria and across Africa."
         </p>
-        <ul class="service-card__list">
-          <li>Skilled manpower placement</li>
-          <li>On-site &amp; remote training programmes</li>
-          <li>Workforce development partnerships</li>
-        </ul>
       </div>
     </div>
+  </section>
 
-    <div class="services-cta fade-up">
-      <a href="#contact" class="btn btn--green">Contact us today</a>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ TEAM ════════════════════════════ -->
-<section class="section" id="team">
-  <div class="wrap">
-    <div class="team-header fade-up">
-      <div>
-        <div class="eyebrow">Our team <span class="eyebrow__dot"></span></div>
-        <h2>Meet Our Experts</h2>
+  <!-- ── SUSTAINABILITY ── -->
+  <section class="section" id="sustainability">
+    <div class="container">
+      <div class="reveal-up" style="margin-bottom:56px;">
+        <span class="section__eyebrow">Sustainability</span>
+        <h2 class="section__title">What Sustainability Means to Us</h2>
+        <p class="section__lead">
+          At Han&amp;Dan, our sustainability efforts are built on four key pillars
+          that guide how we operate, grow, and deliver impact.
+        </p>
       </div>
-      <p>
-        A team of skilled professionals dedicated to delivering excellence,
-        innovation, and reliable solutions across every project.
+
+      <!-- Pillar 1 -->
+      <div class="sustain-pillar reveal-up">
+        <div class="sustain-pillar__media">
+          <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop&q=80" alt="Environmental stewardship" loading="lazy" />
+        </div>
+        <div class="sustain-pillar__copy">
+          <div class="sustain-pillar__label">Pillar one <span></span></div>
+          <h3>Environmental Stewardship</h3>
+          <p>We are committed to reducing the environmental footprint of oil and gas servicing through practical, measurable actions.</p>
+          <ul class="sustain-list">
+            <li><strong>Eco-Friendly Procurement:</strong> We source equipment, tools, and materials from suppliers who follow environmentally responsible practices.</li>
+            <li><strong>Emission Reduction:</strong> We prioritise technologies and service practices that minimise greenhouse gas emissions and energy waste.</li>
+            <li><strong>Circularity in Operations:</strong> We advocate for reuse, recycling, and responsible waste disposal within circular economy principles.</li>
+            <li><strong>Compliance with Global Standards:</strong> Our operations align with ISO 14001 and ISO 50001.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="sustain-pillar sustain-pillar--rev reveal-up">
+        <div class="sustain-pillar__media">
+          <img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&auto=format&fit=crop&q=80" alt="Social responsibility" loading="lazy" />
+        </div>
+        <div class="sustain-pillar__copy">
+          <div class="sustain-pillar__label">Pillar two <span></span></div>
+          <h3>Social Responsibility</h3>
+          <p>Han&amp;Dan's operations are anchored in people and communities.</p>
+          <ul class="sustain-list">
+            <li><strong>Local Content Development:</strong> We invest in Nigerian and African talent by prioritising indigenous suppliers and subcontractors.</li>
+            <li><strong>Capacity Building:</strong> We train and mentor young engineers and technicians.</li>
+            <li><strong>Health &amp; Safety:</strong> We uphold the highest HSE standards to protect employees, contractors, and host communities.</li>
+            <li><strong>Community Impact:</strong> We support educational programs, healthcare access, and sustainable local businesses.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="sustain-pillar reveal-up">
+        <div class="sustain-pillar__media">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format&fit=crop&q=80" alt="Governance and integrity" loading="lazy" />
+        </div>
+        <div class="sustain-pillar__copy">
+          <div class="sustain-pillar__label">Pillar three <span></span></div>
+          <h3>Governance &amp; Integrity</h3>
+          <p>Sustainability also means strong governance structures that build trust.</p>
+          <ul class="sustain-list">
+            <li><strong>Transparency:</strong> Honest communication with stakeholders and regulators.</li>
+            <li><strong>Ethical Procurement:</strong> Monitoring supply chains for anti-corruption and labour standards.</li>
+            <li><strong>Accountability:</strong> Reporting aligned with GRI and SDG frameworks.</li>
+            <li><strong>Partnerships:</strong> Working only with organisations that share our sustainability values.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="sustain-pillar sustain-pillar--rev reveal-up">
+        <div class="sustain-pillar__media">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=80" alt="Innovation and future outlook" loading="lazy" />
+        </div>
+        <div class="sustain-pillar__copy">
+          <div class="sustain-pillar__label">Pillar four <span></span></div>
+          <h3>Innovation &amp; Future Outlook</h3>
+          <p>Han&amp;Dan is not only a supplier but also a driver of innovation in sustainable energy servicing.</p>
+          <ul class="sustain-list">
+            <li><strong>Energy Transition Support:</strong> Expanding services into renewable energy integration.</li>
+            <li><strong>Digitalization for Sustainability:</strong> Using AI and data-driven platforms for efficiency and compliance.</li>
+            <li><strong>Regional Expansion:</strong> Scaling across Africa with sustainability at the core of growth.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SDG TILES ── -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="sdg-intro reveal-up">
+        <h2>Alignment with the UN Sustainable Development Goals (SDGs)</h2>
+      </div>
+      <div class="sdg-row-top reveal-up">
+        <div class="sdg-tile sdg-tile--7">
+          <div><div class="sdg-tile__number">7</div><div class="sdg-tile__title">Affordable &amp; Clean Energy</div></div>
+          <div class="sdg-tile__icon">⚡</div>
+        </div>
+        <div class="sdg-tile sdg-tile--8">
+          <div><div class="sdg-tile__number">8</div><div class="sdg-tile__title">Decent Work &amp; Economic Growth</div></div>
+          <div class="sdg-tile__icon">📊</div>
+        </div>
+        <div class="sdg-tile sdg-tile--9">
+          <div><div class="sdg-tile__number">9</div><div class="sdg-tile__title">Industry, Innovation &amp; Infrastructure</div></div>
+          <div class="sdg-tile__icon">🔄</div>
+        </div>
+      </div>
+      <div class="sdg-row-bottom reveal-up">
+        <div class="sdg-tile sdg-tile--12">
+          <div><div class="sdg-tile__number">12</div><div class="sdg-tile__title">Responsible Consumption &amp; Production</div></div>
+          <div class="sdg-tile__icon">♻️</div>
+        </div>
+        <div class="sdg-tile sdg-tile--13">
+          <div><div class="sdg-tile__number">13</div><div class="sdg-tile__title">Climate Action</div></div>
+          <div class="sdg-tile__icon">🌍</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT / CTA ── -->
+  <section class="cta-band" id="contact">
+    <div class="container reveal-up">
+      <div class="cta-band__eyebrow">Get in touch <span></span></div>
+      <h2 class="cta-band__title">We Are Waiting For You.</h2>
+      <p class="cta-band__text">
+        We're here to answer your questions, provide support, and discuss how we can help your business.
       </p>
-    </div>
-
-    <div class="team-grid-top">
-      <div class="team-photo fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=80"
-          alt="Senior Executive"
-          loading="lazy"
-        />
-      </div>
-      <div class="team-photo fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80"
-          alt="Technical Director"
-          loading="lazy"
-        />
-      </div>
-      <div class="team-photo fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&auto=format&fit=crop&q=80"
-          alt="Head of HSE"
-          loading="lazy"
-        />
-      </div>
-    </div>
-    <div class="team-grid-bottom">
-      <div class="team-photo fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80"
-          alt="Operations Manager"
-          loading="lazy"
-        />
-      </div>
-      <div class="team-photo fade-up">
-        <img
-          src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80"
-          alt="Business Development"
-          loading="lazy"
-        />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ QUOTE BANNER ════════════════════════════ -->
-<section class="section--sm">
-  <div class="wrap">
-    <div class="quote-card fade-up">
-      <div class="quote-card__bg"></div>
-      <p class="quote-card__text">
-        At Han&amp;Dan; profitability and responsibility go hand-in-hand.
-        We align business growth with sustainable development across Nigeria and across Africa.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ SUSTAINABILITY ════════════════════════════ -->
-<section class="section" id="sustainability">
-  <div class="wrap">
-    <div class="sustain-intro fade-up">
-      <div class="eyebrow">Sustainability <span class="eyebrow__dot"></span></div>
-      <h2>What Sustainability Means to Us</h2>
-      <p>
-        At Han&amp;Dan, our sustainability efforts are built on four key pillars
-        that guide how we operate, grow, and deliver impact.
-      </p>
-    </div>
-
-    <!-- Pillar 1 -->
-    <div class="sustain-pillar fade-up">
-      <div class="sustain-pillar__img">
-        <img
-          src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop&q=80"
-          alt="Environmental stewardship"
-          loading="lazy"
-        />
-      </div>
-      <div class="sustain-pillar__copy">
-        <div class="sustain-pillar__label">Pillar one <span>●</span></div>
-        <h3>Environmental Stewardship</h3>
-        <p>We are committed to reducing the environmental footprint of oil and gas servicing through practical, measurable actions.</p>
-        <ul class="sustain-list">
-          <li><strong>Eco-Friendly Procurement:</strong> We source equipment, tools, and materials from suppliers who follow environmentally responsible practices.</li>
-          <li><strong>Emission Reduction:</strong> We prioritise technologies and service practices that minimise greenhouse gas emissions and energy waste.</li>
-          <li><strong>Circularity in Operations:</strong> We advocate for reuse, recycling, and responsible waste disposal within circular economy principles.</li>
-          <li><strong>Compliance with Global Standards:</strong> Our operations align with ISO 14001 and ISO 50001.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Pillar 2 -->
-    <div class="sustain-pillar sustain-pillar--rev fade-up">
-      <div class="sustain-pillar__img">
-        <img
-          src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&auto=format&fit=crop&q=80"
-          alt="Social responsibility"
-          loading="lazy"
-        />
-      </div>
-      <div class="sustain-pillar__copy">
-        <div class="sustain-pillar__label">Pillar two <span>●</span></div>
-        <h3>Social Responsibility</h3>
-        <p>Han&amp;Dan's operations are anchored in people and communities.</p>
-        <ul class="sustain-list">
-          <li><strong>Local Content Development:</strong> We invest in Nigerian and African talent by prioritising indigenous suppliers and subcontractors.</li>
-          <li><strong>Capacity Building:</strong> We train and mentor young engineers and technicians.</li>
-          <li><strong>Health &amp; Safety:</strong> We uphold the highest HSE standards to protect employees, contractors and host communities.</li>
-          <li><strong>Community Impact:</strong> We support educational programs, healthcare access, and sustainable local businesses.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Pillar 3 -->
-    <div class="sustain-pillar fade-up">
-      <div class="sustain-pillar__img">
-        <img
-          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format&fit=crop&q=80"
-          alt="Governance and integrity"
-          loading="lazy"
-        />
-      </div>
-      <div class="sustain-pillar__copy">
-        <div class="sustain-pillar__label">Pillar three <span>●</span></div>
-        <h3>Governance &amp; Integrity</h3>
-        <p>Sustainability also means strong governance structures that build trust.</p>
-        <ul class="sustain-list">
-          <li><strong>Transparency:</strong> Honest communication with stakeholders and regulators.</li>
-          <li><strong>Ethical Procurement:</strong> Monitoring supply chains for anti-corruption and labour standards.</li>
-          <li><strong>Accountability:</strong> Reporting aligned with GRI and SDG frameworks.</li>
-          <li><strong>Partnerships:</strong> Working only with organisations that share sustainability values.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Pillar 4 -->
-    <div class="sustain-pillar sustain-pillar--rev fade-up">
-      <div class="sustain-pillar__img">
-        <img
-          src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&auto=format&fit=crop&q=80"
-          alt="Innovation and future outlook"
-          loading="lazy"
-        />
-      </div>
-      <div class="sustain-pillar__copy">
-        <div class="sustain-pillar__label">Pillar four <span>●</span></div>
-        <h3>Innovation &amp; Future Outlook</h3>
-        <p>Han&amp;Dan is not only a supplier but also a driver of innovation in sustainable energy servicing.</p>
-        <ul class="sustain-list">
-          <li><strong>Energy Transition Support:</strong> Expanding services into renewable energy integration.</li>
-          <li><strong>Digitalization for Sustainability:</strong> Using AI and data-driven platforms for efficiency and compliance.</li>
-          <li><strong>Regional Expansion:</strong> Scaling across Africa with sustainability at the core of growth.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ SDG ════════════════════════════ -->
-<section class="section--sm">
-  <div class="wrap">
-    <div class="sdg-intro fade-up">
-      <h2>Alignment with the UN Sustainable Development Goals (SDGs)</h2>
-    </div>
-    <div class="sdg-row-top fade-up">
-      <div class="sdg-tile sdg--7">
-        <div>
-          <div class="sdg-tile__num">7</div>
-          <div class="sdg-tile__name">Affordable &amp; Clean Energy</div>
-        </div>
-        <div class="sdg-tile__icon">⚡</div>
-      </div>
-      <div class="sdg-tile sdg--8">
-        <div>
-          <div class="sdg-tile__num">8</div>
-          <div class="sdg-tile__name">Decent Work &amp; Economic Growth</div>
-        </div>
-        <div class="sdg-tile__icon">📊</div>
-      </div>
-      <div class="sdg-tile sdg--9">
-        <div>
-          <div class="sdg-tile__num">9</div>
-          <div class="sdg-tile__name">Industry, Innovation &amp; Infrastructure</div>
-        </div>
-        <div class="sdg-tile__icon">🔄</div>
-      </div>
-    </div>
-    <div class="sdg-row-bottom fade-up">
-      <div class="sdg-tile sdg--12">
-        <div>
-          <div class="sdg-tile__num">12</div>
-          <div class="sdg-tile__name">Responsible Consumption &amp; Production</div>
-        </div>
-        <div class="sdg-tile__icon">♻️</div>
-      </div>
-      <div class="sdg-tile sdg--13">
-        <div>
-          <div class="sdg-tile__num">13</div>
-          <div class="sdg-tile__name">Climate Action</div>
-        </div>
-        <div class="sdg-tile__icon">🌍</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ CONTACT ════════════════════════════ -->
-<section class="section contact-section" id="contact">
-  <div class="wrap">
-    <div class="fade-up">
-      <div class="eyebrow" style="justify-content:center;">Get in touch <span class="eyebrow__dot"></span></div>
-      <h2>We Are Waiting For You</h2>
-      <p>We're here to answer your questions, provide support, and discuss how we can help your business.</p>
-      <div class="contact-details">
-        <div class="contact-item">
+      <div class="cta-band__contact">
+        <div class="cta-band__contact-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
           </svg>
           <a href="mailto:han&dan@gmail.com">han&amp;dan@gmail.com</a>
         </div>
-        <div class="contact-item">
+        <div class="cta-band__contact-item">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
           <a href="tel:+2348103006714">+234 810 300 6714</a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════ FOOTER ════════════════════════════ -->
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-inner">
-      <div class="footer-logo">
-        <img src="brand_assets/Logo.png" alt="Han&amp;Dan Energy Services Limited" />
+      <div class="cta-band__actions">
+        <a href="mailto:han&dan@gmail.com" class="btn btn--primary">Send us a Message</a>
+        <a href="#services" class="btn btn--ghost">Explore Services</a>
       </div>
-      <nav class="footer-nav">
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#sustainability">Sustainability</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <p class="footer-copy">&copy; 2026 Han&amp;Dan Energy Services Limited. All rights reserved.</p>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer">
+        <div class="footer__logo">
+          <img src="brand_assets/Logo.png" alt="Han&amp;Dan Energy Services Limited" />
+        </div>
+        <nav class="footer__nav">
+          <a href="#about">About Us</a>
+          <a href="#services">Services</a>
+          <a href="#team">Team</a>
+          <a href="#sustainability">Sustainability</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <p class="footer__meta">&copy; 2026 Han&amp;Dan Energy Services Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /site-shell -->
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('in-view');
+        observer.unobserve(el.target);
       }
     });
-  }, { threshold: 0.07 });
+  }, { threshold: 0.08 });
 
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  document.querySelectorAll('.reveal-up').forEach((el, i) => {
+    el.style.animationDelay = `${(i % 5) * 0.09}s`;
     observer.observe(el);
   });
 </script>
-
 </body>
 </html>
